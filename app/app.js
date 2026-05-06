@@ -3,7 +3,7 @@ const http = require("http");
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer((req, res) => {
-  res.end("Hello from EKS DevOps Platform 🚀");
+  res.end("I will be successful and everything will align well for me 🚀");
 });
 
 server.listen(PORT, () => {
