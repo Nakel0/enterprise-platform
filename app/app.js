@@ -4,27 +4,36 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
-const server = http.createServer((req, res) => {
+const client = require('prom-client');
 
-  if (req.url === "/") {
-    fs.readFile(path.join(__dirname, "index.html"), (err, data) => {
-      res.writeHead(200, { "Content-Type": "text/html" });
-      res.end(data);
-    });
-  }
+// collect default metrics (CPU, memory, etc.)
+client.collectDefaultMetrics();
 
-  else if (req.url === "/style.css") {
-    fs.readFile(path.join(__dirname, "style.css"), (err, data) => {
-      res.writeHead(200, { "Content-Type": "text/css" });
-      res.end(data);
-    });
-  }
-
-  else {
-    res.writeHead(404);
-    res.end("Not Found");
-  }
+// custom metric
+const requestCounter = new client.Counter({
+  name: 'app_requests_total',
+  help: 'Total number of requests',
 });
+
+const server = http.createServer(async (req, res) => {
+
+    // 🔹 Metrics endpoint
+    if (req.url === "/metrics") {
+      res.writeHead(200, { "Content-Type": client.register.contentType });
+      res.end(await client.register.metrics());
+    }
+  
+    // 🔹 Home page
+    else if (req.url === "/") {
+      requestCounter.inc(); // count requests
+      res.end("Kosmani App 🚀");
+    }
+  
+    else {
+      res.writeHead(404);
+      res.end("Not Found");
+    }
+  });
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
