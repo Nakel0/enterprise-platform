@@ -137,3 +137,45 @@ kubectl get svc
 
 Olalekan Okunleye
 Cloud | DevOps | SRE Engineer
+
+
+architecture workflow 
+
+## 🏗️ Architecture Diagram
+
+```mermaid
+flowchart LR
+
+%% ===== Developer Layer =====
+A[👨‍💻 Developer] -->|Push Code| B[GitHub Repository]
+
+%% ===== CI Layer =====
+subgraph CI Pipeline (GitHub Actions)
+    B --> C[Trigger Pipeline]
+    C --> D[Build Docker Image]
+    D --> E[Push Image to AWS ECR]
+    C --> F[Update Kubernetes Manifests]
+end
+
+%% ===== GitOps Layer =====
+subgraph GitOps (ArgoCD)
+    F --> G[Git Repository (Source of Truth)]
+    G --> H[ArgoCD Sync]
+end
+
+%% ===== Kubernetes Layer =====
+subgraph AWS Cloud (EKS Cluster)
+    H --> I[Kubernetes Deployment]
+    I --> J[Pods (Application Containers)]
+    J --> K[Service (LoadBalancer)]
+end
+
+%% ===== User Access =====
+K --> L[🌍 End Users]
+
+%% ===== Observability Layer =====
+subgraph Monitoring & Observability
+    J --> M[/metrics endpoint]
+    M --> N[Prometheus (Metrics Collection)]
+    N --> O[Grafana (Dashboards)]
+end
