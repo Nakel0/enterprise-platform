@@ -26,7 +26,7 @@ const server = http.createServer(async (req, res) => {
     // 🔹 Home page
     else if (req.url === "/") {
       requestCounter.inc(); // count requests
-      res.end("Kosmani App 🚀");
+      res.end("Kosmani App ");
     }
   
     else {

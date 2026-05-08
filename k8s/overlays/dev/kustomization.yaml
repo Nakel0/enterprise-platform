@@ -1,0 +1,6 @@
+resources:
+  - ../../base
+
+nameSuffix: -dev
+
+replicas: 1
