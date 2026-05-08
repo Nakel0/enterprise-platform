@@ -3,4 +3,6 @@ resources:
 
 nameSuffix: -dev
 
-replicas: 1
+replicas:
+  - name: preview-app
+    count: 1
