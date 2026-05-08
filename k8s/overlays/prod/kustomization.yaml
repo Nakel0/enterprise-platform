@@ -5,4 +5,4 @@ nameSuffix: -prod
 
 replicas:
   - name: preview-app
-    count: 3
+    count: 1
