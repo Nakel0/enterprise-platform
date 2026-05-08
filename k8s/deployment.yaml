@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: preview-app
-        image: 430695042378.dkr.ecr.us-east-1.amazonaws.com/preview-app:d3b78d8e4e0e471e6ba05d346fc405cf0c8ad6ab
+        image: 430695042378.dkr.ecr.us-east-1.amazonaws.com/preview-app:f7ad1f5e09e8f9e225634cbfd8534586dde6dca5
         ports:
         - containerPort: 3000
