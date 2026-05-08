@@ -49,7 +49,7 @@ jobs:
 
       - name: Update Kubernetes manifest
         run: |
-          sed -i "s|image:.*|image: $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}|" k8s/deployment.yaml
+          sed -i "s|image:.*|image: $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}|" k8s/base/deployment.yaml
 
       - name: Commit & push manifest update
         run: |
