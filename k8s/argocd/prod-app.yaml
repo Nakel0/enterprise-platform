@@ -4,6 +4,7 @@ metadata:
   name: preview-app-prod
   namespace: argocd
 spec:
+  project: default
   source:
     repoURL: https://github.com/Nakel0/enterprise-platform.git
     targetRevision: HEAD
